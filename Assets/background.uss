@@ -1,0 +1,24 @@
+.background-image {
+    background-image: resource('Background/pendu_0');
+}
+
+.unity-button {
+    transform-origin: bottom;
+    width: 65px;
+    height: 65px;
+    max-height: none;
+    flex-direction: row;
+    left: 30%;
+    top: 75%;
+}
+
+.unity_button2 {
+    left: -10%;
+    top: 82%;
+}
+
+.unity-button3 {
+    left: auto;
+    top: 90%;
+    right: 40%;
+}

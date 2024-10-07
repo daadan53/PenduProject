@@ -1,0 +1,36 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/background.uss?fileID=7433441132597879392&amp;guid=cf3178bf767050d46ac3b78c3e0b6fcb&amp;type=3#background" />
+    <ui:VisualElement name="Background" class="background-image" style="flex-grow: 1;">
+        <ui:VisualElement style="flex-grow: 1; flex-direction: column-reverse;">
+            <ui:VisualElement style="flex-grow: 0;" />
+            <ui:VisualElement name="ButtonPanel" style="flex-grow: 1; flex-direction: row;">
+                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_1" />
+                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button_2" />
+                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" class="unity_button2" />
+                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" class="unity_button2" />
+                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" class="unity_button2" />
+                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" class="unity_button2" />
+                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" class="unity_button2" />
+                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" class="unity_button2" />
+                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" class="unity_button2" />
+                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" class="unity_button2" />
+                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" class="unity_button2" />
+                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" class="unity_button2" />
+                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" class="unity-button3" />
+                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" class="unity-button3" />
+                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" class="unity-button3" />
+                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" class="unity-button3" />
+                <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" class="unity-button3" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
