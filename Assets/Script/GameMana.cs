@@ -1,15 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameMana : MonoBehaviour
 {
+    //public static GameMana instance;
+
     [SerializeField] private Sprite[] backgroundArray;
     [SerializeField] private GameObject panelBackground;
     [SerializeField] private Image backgroundImage;
     private int currentIndex = 0;
     [SerializeField] private GameObject[] changBckgrdButton; //Récup tous les bouttons
+
+    /*private void Awake() 
+    {
+        if(instance != null)
+        {
+            Destroy(gameObject);
+        }   
+        instance = this;
+    }*/
 
     void Start()
     {
@@ -62,6 +74,7 @@ public class GameMana : MonoBehaviour
             if (btn != null)
             {
                 btn.onClick.AddListener(() => ChangeBackground(btn)); // Ajoute un listener qui désactivera le bouton cliqué
+                // Add l'index du bouton avec son text dans un dico ?
             }
             else
             {
@@ -73,18 +86,48 @@ public class GameMana : MonoBehaviour
     //Methode à l'appuie sur le bouton
     public void ChangeBackground(Button clickedButton)
     {
-        currentIndex++;
-
         //Cond de défaite
         if(currentIndex >= backgroundArray.Length)
         {
             Application.Quit();
             Debug.Log("Cest finit");
+            return;
         }
 
-        if(backgroundArray[currentIndex] != null)
+        // Vérifier si clickedButton est nul
+        if (clickedButton == null)
         {
-            backgroundImage.sprite = backgroundArray[currentIndex];
+            Debug.LogError("Le bouton cliqué est nul !");
+            return;
+        }
+
+        //On est dans la liste de background
+        if(currentIndex < backgroundArray.Length && backgroundArray[currentIndex] != null)
+        {
+            TextMeshProUGUI textComponent = clickedButton.GetComponentInChildren<TextMeshProUGUI>();
+
+            //C'est ici que je vais vérifié si la lettre est dans le mot
+            if(textComponent != null )
+            {
+                string textButton = textComponent.text.ToLower(); // Récupérer le texte du premier txtmshpro trouver
+                //Debug.Log(textButton);
+
+                //Lettre dans le mot
+                if(WordsMana.Instance.wordChoosen.Contains(textButton))
+                {
+                    Debug.Log("Bien joué " + textButton + " est dans ce mot");
+                }
+                //Lettre pas dans le mot
+                else 
+                {
+                    currentIndex++;
+                    backgroundImage.sprite = backgroundArray[currentIndex];
+                }
+            } 
+            else
+            {
+                Debug.LogError("Aucun composant TextMeshPro trouvé dans l'enfant du bouton !");
+            }
         }
         else
         {
@@ -93,4 +136,9 @@ public class GameMana : MonoBehaviour
         
         clickedButton.interactable = false;
     }
+
+    /*private void OnDestroy() 
+    {
+        instance = null;
+    }*/
 }
