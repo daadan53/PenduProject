@@ -1,15 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameMana : MonoBehaviour
 {
-    [SerializeField] private Sprite[] background;
+    [SerializeField] private Sprite[] backgroundArray;
+    [SerializeField] private GameObject panelBackground;
+    [SerializeField] private Image backgroundImage;
+    private int currentIndex = 0;
+    [SerializeField] private GameObject[] changBckgrdButton; //Récup tous les bouttons
 
     void Start()
     {
-        background = new Sprite[10];
+        backgroundArray = new Sprite[10];
+        panelBackground = GameObject.Find("Background");
+        backgroundImage = panelBackground.GetComponent<Image>();
+        changBckgrdButton = GameObject.FindGameObjectsWithTag("ButtonBckgrd");
+
+        if (panelBackground == null)
+        {
+            Debug.LogError("Pannel non trouvé");
+            return;
+        }
+
         TakeBackground();
+        TakeButton();
 
     }
 
@@ -21,24 +37,60 @@ public class GameMana : MonoBehaviour
     // Methode qui récup les asset du pendu
     public void TakeBackground()
     {
-        for (int i = 0; i < background.Length; i++)
+        for (int i = 0; i < backgroundArray.Length; i++)
         {
             //On récup les sprites dans le dossier ressources/Background
-            background[i] = Resources.Load<Sprite>("Background/pendu_" + i);
+            backgroundArray[i] = Resources.Load<Sprite>("Background/pendu_" + i);
             
             // Vérification si le sprite a bien été chargé
-            if (background[i] == null)
+            if (backgroundArray[i] == null)
             {
                 Debug.LogError("Le sprite 'pendu_" + i + "' n'a pas été trouvé !");
             }
         }
+
+        //Afficher au start le premier background par def
+        backgroundImage.sprite = backgroundArray[0];
     } 
 
-    /*public Sprite ShowBackground()
+    //On récup les bouttons un par un et on leur met l'event changebckgrd
+    public void TakeButton()
     {
-        // Background par défaut
-        Sprite showed = background[0];
+        foreach(GameObject button in changBckgrdButton)
+        {
+            Button btn = button.GetComponent<Button>();
+            if (btn != null)
+            {
+                btn.onClick.AddListener(() => ChangeBackground(btn)); // Ajoute un listener qui désactivera le bouton cliqué
+            }
+            else
+            {
+                Debug.LogError("Le GameObject " + button.name + " n'a pas de composant Button !");
+            }
+        }
+    }
 
-        return showed;
-    }*/
+    //Methode à l'appuie sur le bouton
+    public void ChangeBackground(Button clickedButton)
+    {
+        currentIndex++;
+
+        //Cond de défaite
+        if(currentIndex >= backgroundArray.Length)
+        {
+            Application.Quit();
+            Debug.Log("Cest finit");
+        }
+
+        if(backgroundArray[currentIndex] != null)
+        {
+            backgroundImage.sprite = backgroundArray[currentIndex];
+        }
+        else
+        {
+            Debug.LogError("Sprite à l'index " + currentIndex + " est null !");
+        }
+        
+        clickedButton.interactable = false;
+    }
 }
