@@ -14,7 +14,7 @@ public class GameMana : MonoBehaviour
     [SerializeField] private GameObject panelWin;
     [SerializeField] private Image backgroundImage;
     private int currentIndex = 0;
-    private int nbrLettre = 0;
+    public int nbrLettre = 0;
     [SerializeField] private GameObject[] changBckgrdButton; //Récup tous les bouttons
 
     void Start()
@@ -123,7 +123,6 @@ public class GameMana : MonoBehaviour
                 //Lettre dans le mot
                 if(instanceWord.wordChoosen.Contains(textButton))
                 {
-                    nbrLettre++;
                     Debug.Log("Bien joué " + textButton + " est dans ce mot");
 
                     //L'afficher au dessus du tiret
@@ -139,6 +138,7 @@ public class GameMana : MonoBehaviour
                         if(textComponent.text.ToUpper() == textButton.ToUpper())
                         {
                             instanceWord.textElements[i].SetActive(true);
+                            nbrLettre++;
                         }
                     }
 
