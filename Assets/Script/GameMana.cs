@@ -2,26 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameMana : MonoBehaviour
 {
-    //public static GameMana instance;
-
+    private WordsMana instanceWord;
     [SerializeField] private Sprite[] backgroundArray;
     [SerializeField] private GameObject panelBackground;
+    [SerializeField] private GameObject panelGameOver;
+    [SerializeField] private GameObject panelWin;
     [SerializeField] private Image backgroundImage;
     private int currentIndex = 0;
+    private int nbrLettre = 0;
     [SerializeField] private GameObject[] changBckgrdButton; //Récup tous les bouttons
-
-    /*private void Awake() 
-    {
-        if(instance != null)
-        {
-            Destroy(gameObject);
-        }   
-        instance = this;
-    }*/
 
     void Start()
     {
@@ -29,12 +23,28 @@ public class GameMana : MonoBehaviour
         panelBackground = GameObject.Find("Background");
         backgroundImage = panelBackground.GetComponent<Image>();
         changBckgrdButton = GameObject.FindGameObjectsWithTag("ButtonBckgrd");
+        panelGameOver = GameObject.FindGameObjectWithTag("Finish");
+        panelWin = GameObject.Find("WinPanel");
+
+        instanceWord = WordsMana.Instance;
 
         if (panelBackground == null)
         {
-            Debug.LogError("Pannel non trouvé");
+            Debug.LogError("PannelBack non trouvé");
             return;
         }
+
+        if (panelGameOver == null)
+        {
+            Debug.LogError("PannelGO non trouvé");
+        }
+        else {panelGameOver.SetActive(false);}
+
+        if (panelWin == null)
+        {
+            Debug.LogError("PannelWin non trouvé");
+        }
+        else {panelWin.SetActive(false);}
 
         TakeBackground();
         TakeButton();
@@ -87,11 +97,9 @@ public class GameMana : MonoBehaviour
     public void ChangeBackground(Button clickedButton)
     {
         //Cond de défaite
-        if(currentIndex >= backgroundArray.Length)
+        if(currentIndex >= backgroundArray.Length - 1)
         {
-            Application.Quit();
-            Debug.Log("Cest finit");
-            return;
+            panelGameOver.SetActive(true);
         }
 
         // Vérifier si clickedButton est nul
@@ -113,9 +121,31 @@ public class GameMana : MonoBehaviour
                 //Debug.Log(textButton);
 
                 //Lettre dans le mot
-                if(WordsMana.Instance.wordChoosen.Contains(textButton))
+                if(instanceWord.wordChoosen.Contains(textButton))
                 {
+                    nbrLettre++;
                     Debug.Log("Bien joué " + textButton + " est dans ce mot");
+
+                    //L'afficher au dessus du tiret
+
+                    //nbr de traits : 
+                    int textCount = Mathf.Min(instanceWord.nbrClones, instanceWord.textElements.Length);
+
+                    for (int i = 0; i < textCount; i++)
+                    {
+                        // Récupérer le composant Text de chaque élément
+                        textComponent = instanceWord.textElements[i].GetComponent<TextMeshProUGUI>();
+
+                        if(textComponent.text.ToUpper() == textButton.ToUpper())
+                        {
+                            instanceWord.textElements[i].SetActive(true);
+                        }
+                    }
+
+                    if(nbrLettre == instanceWord.wordChoosen.Length)
+                    {
+                        panelWin.SetActive(true);
+                    }
                 }
                 //Lettre pas dans le mot
                 else 
@@ -137,8 +167,13 @@ public class GameMana : MonoBehaviour
         clickedButton.interactable = false;
     }
 
-    /*private void OnDestroy() 
+    public void OnRestartClick()
     {
-        instance = null;
-    }*/
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void OnButtonQuit()
+    {
+        Application.Quit();
+    }
 }

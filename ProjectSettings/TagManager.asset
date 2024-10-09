@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ButtonBckgrd
   - Trait
+  - txtChoosen
   layers:
   - Default
   - TransparentFX
