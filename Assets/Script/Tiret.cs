@@ -1,75 +1,23 @@
-//using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UI;
 
-public class WordsMana : MonoBehaviour
+public class Tiret : MonoBehaviour
 {
-    public static WordsMana Instance;
-
-    public UnityEvent<bool, string> OnLetterChecked;
-
-    [SerializeField] private List<string> wordsList = new List<string>();
-    private int rdmWordIndex;
-    public string wordChoosen;
-    [SerializeField] private float spacing = 120f;
-    public GameObject[] textElements;
+    private WordsMana wordsMana;
     public int nbrClones;
+    public GameObject[] textElements;
+    [SerializeField] private float spacing = 120f;
 
     private void Awake() 
     {
-        if(Instance != null)
-        {
-            Destroy(gameObject);
-        }   
-        Instance = this;
-
-        LoadWords();
-
-        //Initialise l'event
-        if (OnLetterChecked == null)
-        {
-            OnLetterChecked = new UnityEvent<bool, string>();
-        }
+        wordsMana = WordsMana.Instance;
     }
 
     void Start()
     {
-        rdmWordIndex = Random.Range(0, wordsList.Count);
-        wordChoosen = wordsList[rdmWordIndex];
-
-        DupplicateTiret(wordChoosen);
-    }
-
-
-    void Update()
-    {
-        
-    }
-
-    //Recup les mots du fichier txt
-    void LoadWords()
-    {
-        // Chargement du fichier depuis le dossier Resources
-        TextAsset wordFile = Resources.Load<TextAsset>("Words/WordsList");
-        
-        if (wordFile != null)
-        {
-            // Séparer les mots par ligne
-            string[] words = wordFile.text.Split(new char[] { '\n', '\r' }, System.StringSplitOptions.RemoveEmptyEntries);
-
-            foreach (string word in words)
-            {
-                wordsList.Add(word.ToLower()); // Add et converti en minuscule
-            }
-        }
-        else
-        {
-            Debug.LogError("Le fichier 'WordsList' n'a pas été trouvé dans le dossier Resources.");
-        }
+        DupplicateTiret(wordsMana.wordChoosen);
     }
 
     void DupplicateTiret(string word)
@@ -120,16 +68,10 @@ public class WordsMana : MonoBehaviour
             TextMeshProUGUI textComponent = textElements[i].GetComponent<TextMeshProUGUI>();
 
             // Assigner la lettre correspondante
-            textComponent.color = Color.red;
             textComponent.text = word[i].ToString().ToUpper();
             
             textElements[i].SetActive(false);
             
         }
-    }
-
-    private void OnDestroy() 
-    {
-        Instance = null;
     }
 }
