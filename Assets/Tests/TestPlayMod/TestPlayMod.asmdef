@@ -1,0 +1,26 @@
+{
+    "name": "TestPlayMod",
+    "rootNamespace": "",
+    "references": [
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner",
+        "TestAssembly",
+        "Unity.InputSystem",
+        "Unity.InputSystem.TestFramework",
+        "Unity.TextMeshPro",
+        "Unity.TextMeshPro.Editor"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
 public class WordsMana : MonoBehaviour
 {
@@ -42,12 +41,6 @@ public class WordsMana : MonoBehaviour
         wordChoosen = wordsList[rdmWordIndex];
 
         DupplicateTiret(wordChoosen);
-    }
-
-
-    void Update()
-    {
-        
     }
 
     //Recup les mots du fichier txt

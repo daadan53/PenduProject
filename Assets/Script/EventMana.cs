@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
+using TMPro;
 
 
 public class EventMana : MonoBehaviour
@@ -14,7 +11,7 @@ public class EventMana : MonoBehaviour
     private int currentIndex = 0;
     public int nbrLettre = 0;
 
-    [SerializeField] private GameObject panelWin;
+    public GameObject panelWin;
     [SerializeField] private GameObject[] changBckgrdButton;
     [SerializeField] private GameObject panelGameOver;
 

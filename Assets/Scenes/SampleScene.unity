@@ -620,9 +620,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c8f23aac7d5fd944a262df94334c731, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panelGameOver: {fileID: 0}
-  panelWin: {fileID: 0}
-  nbrLettre: 0
   changBckgrdButton: []
 --- !u!4 &244654794
 Transform:
@@ -1396,7 +1393,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &401995453
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2285,9 +2282,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 415fb167c0a95ac478d6b97d49adad9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnClick:
-    m_PersistentCalls:
-      m_Calls: []
+  nbrLettre: 0
+  panelWin: {fileID: 1155145847}
+  changBckgrdButton: []
+  panelGameOver: {fileID: 401995452}
 --- !u!4 &535600609
 Transform:
   m_ObjectHideFlags: 0
@@ -5049,7 +5047,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1155145848
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7681,6 +7679,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f5c9f0a00a7b314fad5503886458eea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnLetterChecked:
+    m_PersistentCalls:
+      m_Calls: []
   wordsList: []
   wordChoosen: 
   spacing: 120

@@ -9,7 +9,7 @@ public class Background : MonoBehaviour
 
     public Sprite[] backgroundArray;
     public Image backgroundImage;
-    [SerializeField] private GameObject panelBackground;
+    public GameObject panelBackground;
 
     private void Awake() 
     {
