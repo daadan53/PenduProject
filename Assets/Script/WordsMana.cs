@@ -33,13 +33,13 @@ public class WordsMana : MonoBehaviour
         {
             OnLetterChecked = new UnityEvent<bool, string>();
         }
+
+        rdmWordIndex = Random.Range(0, wordsList.Count);
+        wordChoosen = wordsList[rdmWordIndex];
     }
 
     void Start()
     {
-        rdmWordIndex = Random.Range(0, wordsList.Count);
-        wordChoosen = wordsList[rdmWordIndex];
-
         DupplicateTiret(wordChoosen);
     }
 
@@ -93,6 +93,9 @@ public class WordsMana : MonoBehaviour
                 //New position
                 newRectTransform.anchoredPosition = new Vector2(origineTraitPos.anchoredPosition.x + (i * spacing), 
                 origineTraitPos.anchoredPosition.y);
+
+                //Taille
+                newTrait.transform.localScale = new Vector3(1,2,1);
             }
         }
         else

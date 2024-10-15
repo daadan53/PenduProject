@@ -1,21 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
+using NUnit.Framework.Internal;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
-using UnityEngine.UI;
-using TMPro;
-using System;
-using System.Linq;
 
-public class TestWin : InputTestFixture
+public class TestLoose : InputTestFixture
 {
     Mouse mouse;
     private GameObject[] buttons;
     private WordsMana wordsMana;
-    private GameObject panelWin;
+    private Background background;
+    private GameObject panelGameOver;
     private GameObject restartButton;
 
     public override void Setup()
@@ -36,12 +36,13 @@ public class TestWin : InputTestFixture
             buttons = GameObject.FindGameObjectsWithTag("ButtonBckgrd");
 
             wordsMana = WordsMana.Instance;
+            background = Background.Instance;
 
-            restartButton = Resources.FindObjectsOfTypeAll<GameObject>().FirstOrDefault(obj => obj.name == "ButtonRestart2");
+            restartButton = Resources.FindObjectsOfTypeAll<GameObject>().FirstOrDefault(obj => obj.name == "ButtonRestart1");
 
             // Rechercher l'objet WinPanel même s'il est désactivé
-            panelWin = Resources.FindObjectsOfTypeAll<GameObject>().FirstOrDefault(obj => obj.name == "WinPanel");
-            Assert.IsNotNull(panelWin, "Le panel win n'a pas été trouvé.");
+            panelGameOver = Resources.FindObjectsOfTypeAll<GameObject>().FirstOrDefault(obj => obj.name == "GameOverPanel");
+            Assert.IsNotNull(panelGameOver, "Le panel game over n'a pas été trouvé.");
 
             SceneManager.sceneLoaded -= OnSceneLoaded; // Désabonner une fois la scène chargée
         }
@@ -69,6 +70,8 @@ public class TestWin : InputTestFixture
         Assert.IsNotEmpty(buttons, "Aucun bouton n'a été trouvé.");
 
         string word = wordsMana.wordChoosen;
+        int nbrBckgrd = background.backgroundArray.Length;
+        int limit = 0;
 
         yield return new WaitForSeconds(1f);
 
@@ -76,15 +79,23 @@ public class TestWin : InputTestFixture
         {
             string buttonText = button.GetComponentInChildren<TextMeshProUGUI>().text.ToUpper();
 
-            if (word.ToUpper().Contains(buttonText))
+            if (!word.ToUpper().Contains(buttonText) && limit < nbrBckgrd - 1)
             {
+                Sprite bckgrd = background.backgroundArray[limit];
                 ClickUI(button);
+                
+                yield return new WaitForSeconds(0.2f);
+
+                limit++;
+
+                Assert.AreNotEqual(bckgrd, background.backgroundArray[limit]);
+                
                 yield return new WaitForSeconds(1f);
             }
         }
 
-        yield return new WaitForSeconds(2f);
-        Assert.IsTrue(panelWin.activeSelf, "Le panel de victoire devrait etre activé");
+        yield return new WaitForSeconds(1f);
+        Assert.IsTrue(panelGameOver.activeSelf, "Le panel de défaite devrait etre activé");
 
         yield return new WaitForSeconds(0.5f);
         ClickUI(restartButton);
