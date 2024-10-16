@@ -69,13 +69,6 @@ public class EventMana : MonoBehaviour
                 panelGameOver.GetComponentInChildren<Text>().text = "Le mot était : " + wordsMana.wordChoosen.ToUpper();
             }
         }
-
-        //Cond de défaite
-        /*if(currentIndex >= background.backgroundArray.Length - 1)
-        {
-            panelGameOver.SetActive(true);
-            panelGameOver.GetComponentInChildren<Text>().text = "Le mot était : " + wordsMana.wordChoosen.ToUpper();
-        }*/
     }
 
     private void OnDestroy()

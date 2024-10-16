@@ -1,13 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
-using UnityEngine.UI;
 using TMPro;
-using System;
 using System.Linq;
 
 public class TestWin : InputTestFixture

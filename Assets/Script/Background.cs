@@ -24,7 +24,6 @@ public class Background : MonoBehaviour
     {
         backgroundArray = new Sprite[10];
         backgroundImage = panelBackground.GetComponent<Image>();
-        //panelBackground = GameObject.Find("Background");
 
         if (panelBackground == null)
         {
